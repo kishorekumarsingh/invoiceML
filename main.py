@@ -10,6 +10,10 @@ sns.set(color_codes=True)
 
 raw_df = pd.read_csv("H2HBABBA2687.csv")
 
+# Remove all the rows with Null clear_date. This will be used for final testing of the model.
+final_test_df = raw_df[raw_df.isOpen == 1]
+final_test_df.to_csv("test.csv")
+
 # Drop all the unnecessary columns
 col_dropped_df = raw_df.drop([
     "name_customer",
@@ -36,7 +40,7 @@ duplicated_df = renamed_df[renamed_df.duplicated()]
 # Remove duplicated rows
 unique_df = renamed_df.drop_duplicates()
 
-# Remove all the rows for open invoices, this data cannot be used either for training, validation or testing the model.
+# Remove all the rows for open invoices
 unique_df = unique_df[unique_df.is_open == 0].drop(["is_open"], axis=1)
 
 
