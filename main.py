@@ -70,8 +70,8 @@ Q3 = unique_df["diff"].quantile(0.99)
 unique_df = unique_df[(unique_df["diff"] > Q1) & (unique_df["diff"] < Q3)]
 
 
-# fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-
+# fig, axes = plt.subplots(1, 2, figsize=(18, 6))
+#
 # ax = axes[0]
 # df = unique_df["currency"].value_counts()
 # ax.pie(df, autopct='%1.1f%%', labels=df.index, startangle=30)
@@ -82,22 +82,36 @@ unique_df = unique_df[(unique_df["diff"] > Q1) & (unique_df["diff"] < Q3)]
 # ax.pie(df, autopct='%1.1f%%', labels=df.index, startangle=30)
 # ax.legend()
 #
-# ax = axes[2]
-# df = unique_df["cust_payment_terms"].value_counts()
-# print(df.count())
-# ax.pie(df, autopct='%1.1f%%', labels=df.index, startangle=30)
-# ax.legend()
-
 # plt.show()
-
-# unique_df.plot.bar(x='cust_payment_terms', y='diff')
+#
+# df = unique_df[{"currency", "diff"}]
+# df = df.groupby(['currency'])['diff'].mean()
+# ax = df.plot(kind='bar', figsize=(20, 10), color="indigo", fontsize=13)
+# ax.set_alpha(0.8)
+# ax.set_title("Days-past-due VS currency", fontsize=22)
+# ax.set_xlabel("currency", fontsize=15)
+# ax.set_ylabel("Number of days past due date", fontsize=15)
 # plt.show()
+#
+# df = unique_df[{"business_code", "diff"}]
+# df = df.groupby(['business_code'])['diff'].mean()
+# ax = df.plot(kind='bar', figsize=(20, 10), color="indigo", fontsize=13)
+# ax.set_alpha(0.8)
+# ax.set_title("Days-past-due VS business_code", fontsize=22)
+# ax.set_xlabel("business_code", fontsize=15)
+# ax.set_ylabel("Number of days past due date", fontsize=15)
+# plt.show()
+#
+#
+# df = unique_df[{"cust_payment_terms", "diff"}]
+# df = df.groupby(['cust_payment_terms'])['diff'].mean()
+# ax = df.plot(kind='bar', figsize=(20, 10), color="indigo", fontsize=13)
+# ax.set_alpha(0.8)
+# ax.set_title("Days-past-due VS cust_payment_terms", fontsize=22)
+# ax.set_xlabel("cust_payment_terms", fontsize=15)
+# ax.set_ylabel("Number of days past due date", fontsize=15)
+# plt.show()
+#
+#
 
-df = unique_df[{"cust_payment_terms", "diff"}]
-# print(df.head())
-df = df.groupby(['cust_payment_terms'])['diff'].mean()
-ax = df.plot(kind='bar', figsize=(20, 6), color="indigo", fontsize=13);
-ax.set_alpha(0.8)
-ax.set_title("Days-past-due VS payment-terms", fontsize=22)
-ax.set_ylabel("Number of days past due date", fontsize=15);
-plt.show()
+
