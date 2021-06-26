@@ -96,7 +96,7 @@ unique_df = unique_df[(unique_df["diff"] > Q1) & (unique_df["diff"] < Q3)]
 df = unique_df[{"cust_payment_terms", "diff"}]
 # print(df.head())
 df = df.groupby(['cust_payment_terms'])['diff'].mean()
-ax = df.plot(kind='bar', figsize=(20,6), color="indigo", fontsize=13);
+ax = df.plot(kind='bar', figsize=(20, 6), color="indigo", fontsize=13);
 ax.set_alpha(0.8)
 ax.set_title("Days-past-due VS payment-terms", fontsize=22)
 ax.set_ylabel("Number of days past due date", fontsize=15);
